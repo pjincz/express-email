@@ -1,0 +1,11 @@
+{
+  "name": "express-mail-preview",
+  "version": "1.0.0",
+  "description": "Preview mail in express.js",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "jinchizhong@kingsoft.com",
+  "license": "BSD-3-Clause"
+}
