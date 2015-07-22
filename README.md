@@ -1,34 +1,65 @@
-Express mail preview
-====================
+Express email
+=============
 
-Render email by [node-email-templates](https://github.com/niftylettuce/node-email-templates) and 
-show in web browser.
+Email solution in node.js.  
+Render by [node-email-templates](https://github.com/niftylettuce/node-email-templates)  
+Preview by [express.js](http://expressjs.com/)  
+Send by [nodemailler](https://github.com/andris9/Nodemailer)  
 
 Usage
 -----
 
-    var preview = require('express-mail-preview');
+    var billing_email = require('express-email')(__dirname + '/email/billing');
 
+    // preview
     if (app.get('env') === 'development') {
-      var opts = {
-        path: path_to_mail_dir, # for more, see node-email-templates
-        locals: {billing_id: 123, user: 'tony'...}, # locals for render template
-        cid: where_to_find_cid
-      };
-      app.get('/_mail/billing.html', preview(opts));    # preview html
-      app.get('/_mail/billing.txt', preview(opts));     # preview text
+      var locals = {activation_code: '000000-0000-00000000-000000-00000000'};
+      app.get('/_mail/billing', billing_email.preview(locals));
     }
 
-If path end with .txt or .text, will show text, elsewise, show html.
+    // render
+    app.get('/sendBilling', function(req, res, next) {
+      // ...
+      var locals = {activation_code: ...};
+      billing_email.render(locals, function(err, result) {
+        // result.html
+        // result.text
+        // result.attachments
+        transporter.sendEmail({
+          from: ...,
+          to: ...,
+          subject: ...,
+          html: result.html,
+          text: result.text,
+          attachments: result.attachments
+        });
+      });
+    });
 
-* `opts.path`: email template dir, see node-email-templates for more details
+API
+---
 
-* `opts.locals`: locals, for render template, see `ejs`, `jade`... for more details
+* `ExpressEmail(mail_dir, [res_dir])` -> EmailEngine
 
-* `opts.cid`: where to find cid
+  `mail_dir`: see [node-email-templates]  
+  `res_dir`: for seaching cid, default: `mail_dir`
 
-  * null or undefined: search in opts.path
-  * path: seach in path
-  * {aaa: path\_of\_aaa, bbb: path\_of\_bbb...}: special as hash
+* `EmailEngine#preview(locals)` -> Express handler
 
-Then, run app in development mode, access `/_mail/billing.html` and `/_mail/billing.txt`, you can view your email.
+  example: `app.get('/_email', engine.preview(locals));`
+  `locals`: for render template  
+
+  In brower:  
+  `get /_email` -> email html preview  
+  `get /_email?text=1` -> email text preview  
+
+* `EmailEngine#render(locals, callback)`
+
+  `locals`: for render template  
+  `callback`: `function(err, result)`  
+  `result.html`: html result  
+  `result.text`: text result  
+  `result.attachments`: attachments for cid  
+
+Notice: you can reference cids in your html template, Express email will known it,
+and find them in res\_dir, and generate `result.attachments`
