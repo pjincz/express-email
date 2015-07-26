@@ -1,6 +1,6 @@
 {
   "name": "express-email",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Preview and send email in express.js",
   "main": "lib/index.js",
   "scripts": {
@@ -10,5 +10,16 @@
   "license": "BSD-3-Clause",
   "dependencies": {
     "email-templates": "^2.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jinchizhong/express-email"
+  },
+  "homepage": "https://github.com/jinchizhong/express-email",
+  "devDependencies": {
+    "ejs": "^2.3.3",
+    "express": "^4.13.1",
+    "jade": "^1.11.0",
+    "nodemailer": "^1.4.0"
   }
 }

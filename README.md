@@ -50,8 +50,7 @@ API
   `locals`: for render template  
 
   In brower:  
-  `get /_email` -> email html preview  
-  `get /_email?text=1` -> email text preview  
+  `get /_email` -> email preview
 
 * `EmailEngine#render(locals, callback)`
 
@@ -63,3 +62,8 @@ API
 
 Notice: you can reference cids in your html template, Express email will known it,
 and find them in res\_dir, and generate `result.attachments`
+
+Change Logs
+-----------
+
+* 1.1.0: Preview html and text in one url

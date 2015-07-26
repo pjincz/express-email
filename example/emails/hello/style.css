@@ -1,0 +1,12 @@
+a {
+  color: #cb3837;
+}
+code {
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  border-radius: 3px;
+  background-color: #f1f1f1;
+}
+.greeting {
+  font-weight: bold;
+}

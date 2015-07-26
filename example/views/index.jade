@@ -1,0 +1,24 @@
+doctype html
+html
+  head
+    style.
+      .preview {
+        margin-bottom: 40px;
+      }
+      .send {
+      }
+  body
+    div.preview
+      a(href='/preview') Preview
+
+    div.send
+      form(action='/send')
+        p
+          label Name: 
+          input(placeholder='Your name' name='name')
+        p
+          label Email: 
+          input(placeholder='Your email' name='email')
+        p
+          input(type='submit' value='Send')
+
