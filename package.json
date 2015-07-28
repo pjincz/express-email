@@ -9,7 +9,8 @@
   "author": "jinchizhong@kingsoft.com",
   "license": "BSD-3-Clause",
   "dependencies": {
-    "email-templates": "^2.0.1"
+    "email-templates": "^2.0.1",
+    "extend": "^3.0.0"
   },
   "repository": {
     "type": "git",
